@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLANCO | صيانة الآليات الثقيلة في مصر</title>
+    <meta name="description" content="فريق سوداني متخصص في مصر - م/ معتز علي و م/ مصعب نور الدين">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #c8102e;
+        }
+        
+        * {
+            font-family: 'Cairo', system-ui, sans-serif;
+        }
+        
+        .tailwind-body {
+            background-color: #ffffff;
+            color: #111827;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
+            box-shadow: 4px 0 20px rgba(200, 16, 46, 0.1);
+        }
+        
+        /* Hero 3D Canvas */
+        #hero-canvas {
+            filter: drop-shadow(0 25px 25px rgb(200 16 46 / 0.15));
+        }
+        
+        /* Service Cards */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 25px 25px 50px -12px rgb(200 16 46 / 0.15);
+        }
+        
+        /* WhatsApp Buttons */
+        .wa-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .wa-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 15px -3px rgb(37 211 102);
+        }
+        
+        /* Modal for each specialty page */
+        .modal {
+            animation: modalPop 0.3s ease-out;
+        }
+        
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="tailwind-body">
+
+    <!-- Sidebar قائمة جانبية ثابتة -->
+    <div class="sidebar fixed top-0 bottom-0 left-0 w-72 z-50 flex flex-col border-r border-gray-100">
+        
+        <!-- الشعار صورة مربعة -->
+        <div class="px-8 py-10 border-b border-gray-100 flex items-center justify-center">
+            <div class="w-28 h-28 bg-white rounded-3xl shadow-xl flex items-center justify-center overflow-hidden border-4 border-[#c8102e]">
+                <!-- استبدل src بالصورة المربعة الخاصة بك -->
+                <img src="https://via.placeholder.com/200x200/ffffff/c8102e?text=PLANCO" 
+                     alt="شعار PLANCO" 
+                     class="w-24 h-24 object-contain">
+            </div>
+        </div>
+
+        <!-- التنقل -->
+        <nav class="flex-1 px-6 py-8">
+            <ul class="space-y-2">
+                <li>
+                    <a href="#home" onclick="navigateToSection('home')" 
+                       class="flex items-center gap-3 px-6 py-4 text-lg font-medium rounded-2xl hover:bg-[#c8102e] hover:text-white transition-colors">
+                        <i class="fas fa-home"></i>
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#about" onclick="navigateToSection('about')" 
+                       class="flex items-center gap-3 px-6 py-4 text-lg font-medium rounded-2xl hover:bg-[#c8102e] hover:text-white transition-colors">
+                        <i class="fas fa-info-circle"></i>
+                        <span>عن بلانكو</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#services" onclick="navigateToSection('services')" 
+                       class="flex items-center gap-3 px-6 py-4 text-lg font-medium rounded-2xl hover:bg-[#c8102e] hover:text-white transition-colors">
+                        <i class="fas fa-tools"></i>
+                        <span>خدماتنا</span>
+                    </a>
+                </li>
+                <li class="pt-4">
+                    <p class="px-6 text-xs font-semibold text-gray-400 mb-3 tracking-widest">التخصصات</p>
+                    <a onclick="showSpecialtyModal(1)" 
+                       class="flex items-center gap-3 px-6 py-4 text-lg font-medium rounded-2xl hover:bg-[#c8102e] hover:text-white transition-colors">
+                        <i class="fas fa-truck-crane"></i>
+                        <span>الروافع والرافعات الشوكية</span>
+                    </a>
+                    <a onclick="showSpecialtyModal(2)" 
+                       class="flex items-center gap-3 px-6 py-4 text-lg font-medium rounded-2xl hover:bg-[#c8102e] hover:text-white transition-colors">
+                        <i class="fas fa-bolt"></i>
+                        <span>مولدات الديزل</span>
+                    </a>
+                    <a onclick="showSpecialtyModal(3)" 
+                       class="flex items-center gap-3 px-6 py-4 text-lg font-medium rounded-2xl hover:bg-[#c8102e] hover:text-white transition-colors">
+                        <i class="fas fa-hydraulic"></i>
+                        <span>المنظومات الهيدروليكية الكهربائية</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact" onclick="navigateToSection('contact')" 
+                       class="flex items-center gap-3 px-6 py-4 text-lg font-medium rounded-2xl hover:bg-[#c8102e] hover:text-white transition-colors mt-6">
+                        <i class="fas fa-envelope"></i>
+                        <span>تواصل معنا</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Footer داخل الـ Sidebar -->
+        <div class="p-6 border-t border-gray-100 text-center text-sm text-gray-400">
+            © 2026 PLANCO<br>
+            <span class="text-[#c8102e]">فريق سوداني في مصر</span>
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="ml-72 min-h-screen">
+
+        <!-- Hero Section مع Three.js -->
+        <section id="home" class="relative h-screen flex items-center bg-gradient-to-br from-slate-50 to-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-12 grid grid-cols-2 gap-12 items-center">
+                
+                <!-- نص الـ Hero -->
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 bg-white shadow-md rounded-3xl px-5 py-2 text-[#c8102e] font-semibold text-lg">
+                        <i class="fas fa-flag"></i>
+                        فريق سوداني متخصص في مصر
+                    </div>
+                    
+                    <h1 class="text-7xl font-bold leading-none tracking-tighter text-gray-900">
+                        صيانة احترافية<br>للآليات الثقيلة
+                    </h1>
+                    
+                    <p class="text-3xl text-gray-700 font-medium">
+                        م/ معتز علي • م/ مصعب نور الدين<br>
+                        خبرة ١٥+ عام • تقنية متقدمة • حلول مخصصة
+                    </p>
+                    
+                    <div class="flex items-center gap-4">
+                        <button onclick="navigateToSection('contact')" 
+                                class="bg-[#c8102e] text-white text-2xl font-semibold px-10 py-6 rounded-3xl flex items-center gap-4 hover:bg-[#a00c24] transition-all shadow-xl">
+                            <i class="fas fa-whatsapp text-3xl"></i>
+                            تواصل الآن
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center gap-8 text-sm text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-[#c8102e]"></i>
+                            <span>فحص حاسوبي</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-[#c8102e]"></i>
+                            <span>برمجة تحكم</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-[#c8102e]"></i>
+                            <span>تصنيع حسب الطلب</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canvas Three.js -->
+                <div class="relative">
+                    <canvas id="hero-canvas" class="w-full h-[620px] rounded-3xl"></canvas>
+                    <div class="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow flex items-center gap-3 text-[#c8102e]">
+                        <div class="w-3 h-3 bg-[#c8102e] rounded-full animate-pulse"></div>
+                        نموذج ثلاثي الأبعاد للرافعة
+                    </div>
+                </div>
+            </div>
+
+            <!-- زخرفة خفيفة -->
+            <div class="absolute bottom-12 right-12 text-[#c8102e]/10 text-[280px] font-black leading-none select-none">P</div>
+        </section>
+
+        <!-- عن بلانكو -->
+        <section id="about" class="py-24 bg-white border-t">
+            <div class="max-w-7xl mx-auto px-12">
+                <div class="grid grid-cols-12 gap-16 items-center">
+                    <div class="col-span-7">
+                        <h2 class="text-5xl font-bold mb-8 text-gray-900">عن PLANCO</h2>
+                        <p class="text-2xl leading-relaxed text-gray-700">
+                            PLANCO شركة متخصصة في صيانة وإصلاح الآليات الثقيلة في مصر. 
+                            نحن فريق سوداني محترف بقيادة <strong>م/ معتز علي</strong> و<strong>م/ مصعب نور الدين</strong>، 
+                            نجمع بين خبرة ميدانية تزيد عن ١٥ عاماً والتقنيات الحديثة.
+                        </p>
+                        <p class="mt-8 text-2xl leading-relaxed text-gray-700">
+                            نركز على تقديم حلول متكاملة بأعلى معايير الجودة: فحص حاسوبي، برمجة أنظمة التحكم، 
+                            وتصنيع منظومات هيدروليكية كهربائية حسب احتياج العميل.
+                        </p>
+                    </div>
+                    <div class="col-span-5">
+                        <div class="bg-gradient-to-br from-[#c8102e] to-[#a00c24] text-white rounded-3xl p-12 text-center">
+                            <p class="text-4xl font-semibold">"صيانة احترافية • تقنية متقدمة • فخر سوداني في مصر"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- خدماتنا (مع روابط للصفحات التفصيلية عبر Modal) -->
+        <section id="services" class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-12">
+                <h2 class="text-5xl font-bold text-center mb-16 text-gray-900">خدماتنا الرئيسية</h2>
+                
+                <div class="grid grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div onclick="showSpecialtyModal(1)" class="service-card cursor-pointer bg-white border border-gray-100 rounded-3xl p-8 hover:border-[#c8102e]">
+                        <div class="text-[#c8102e] text-6xl mb-6"><i class="fas fa-truck-crane"></i></div>
+                        <h3 class="text-3xl font-semibold mb-4">الروافع والرافعات الشوكية</h3>
+                        <p class="text-gray-600 text-lg">صيانة شاملة، إصلاح، وتشخيص دقيق لجميع أنواع الروافع والرافعات الشوكية.</p>
+                        <div class="mt-8 text-[#c8102e] flex items-center gap-2 font-medium">
+                            زيارة الصفحة التفصيلية <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div onclick="showSpecialtyModal(2)" class="service-card cursor-pointer bg-white border border-gray-100 rounded-3xl p-8 hover:border-[#c8102e]">
+                        <div class="text-[#c8102e] text-6xl mb-6"><i class="fas fa-bolt"></i></div>
+                        <h3 class="text-3xl font-semibold mb-4">مولدات الديزل</h3>
+                        <p class="text-gray-600 text-lg">صيانة دورية، إصلاح الأعطال، وتركيب مولدات الديزل الصناعية بأحدث التقنيات.</p>
+                        <div class="mt-8 text-[#c8102e] flex items-center gap-2 font-medium">
+                            زيارة الصفحة التفصيلية <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3 -->
+                    <div onclick="showSpecialtyModal(3)" class="service-card cursor-pointer bg-white border border-gray-100 rounded-3xl p-8 hover:border-[#c8102e]">
+                        <div class="text-[#c8102e] text-6xl mb-6"><i class="fas fa-hydraulic"></i></div>
+                        <h3 class="text-3xl font-semibold mb-4">منظومات هيدروليكية كهربائية</h3>
+                        <p class="text-gray-600 text-lg">تصميم وتصنيع وبرمجة حلول هيدروليكية كهربائية مخصصة حسب الطلب.</p>
+                        <div class="mt-8 text-[#c8102e] flex items-center gap-2 font-medium">
+                            زيارة الصفحة التفصيلية <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- تواصل معنا -->
+        <section id="contact" class="py-24 bg-white border-t">
+            <div class="max-w-5xl mx-auto px-12 text-center">
+                <h2 class="text-5xl font-bold mb-6">تواصل مع المهندسين مباشرة</h2>
+                <p class="text-2xl text-gray-600 mb-12">نحن جاهزون لخدمتكم في أي وقت</p>
+                
+                <!-- أيقونات واتساب جنب بعض -->
+                <div class="flex justify-center gap-8">
+                    <a href="https://wa.me/201xxxxxxxxx" target="_blank"
+                       class="wa-btn flex items-center gap-4 bg-[#25D366] text-white text-2xl font-semibold px-12 py-7 rounded-3xl shadow-xl">
+                        <i class="fab fa-whatsapp text-4xl"></i>
+                        <div>
+                            م/ معتز علي<br>
+                            <span class="text-sm opacity-90">واتساب</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://wa.me/201xxxxxxxxx" target="_blank"
+                       class="wa-btn flex items-center gap-4 bg-[#25D366] text-white text-2xl font-semibold px-12 py-7 rounded-3xl shadow-xl">
+                        <i class="fab fa-whatsapp text-4xl"></i>
+                        <div>
+                            م/ مصعب نور الدين<br>
+                            <span class="text-sm opacity-90">واتساب</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <p class="mt-16 text-lg text-gray-500">أو راسلنا على: <span class="font-semibold text-[#c8102e]">info@planco-eg.com</span></p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="max-w-7xl mx-auto px-12 text-center">
+                <p class="text-2xl font-semibold">PLANCO © 2026</p>
+                <p class="mt-3 text-gray-400">فريق سوداني متخصص في صيانة الآليات الثقيلة • مصر</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal صفحة كل تخصص -->
+    <div id="specialtyModal" onclick="if(event.target === this) hideModal()" 
+         class="hidden fixed inset-0 bg-black/70 z-[100] flex items-center justify-center">
+        <div class="modal bg-white max-w-4xl w-full mx-6 rounded-3xl overflow-hidden">
+            <div id="modalContent" class="p-12"></div>
+        </div>
+    </div>
+
+    <script>
+        // تهيئة Tailwind
+        function initializeTailwind() {
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
+                }
+            }
+        }
+
+        // Three.js Scene في الـ Hero
+        let scene, camera, renderer;
+        let craneGroup;
+
+        function initThreeJS() {
+            const canvas = document.getElementById('hero-canvas');
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf8fafc);
+            
+            camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            camera.position.set(0, 8, 18);
+            
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+
+            // إضاءة
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xc8102e, 1.2);
+            directionalLight.position.set(10, 20, 10);
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+
+            // مجموعة الرافعة (نموذج بسيط ثلاثي الأبعاد)
+            craneGroup = new THREE.Group();
+            
+            // القاعدة
+            const base = new THREE.Mesh(
+                new THREE.BoxGeometry(6, 1, 6),
+                new THREE.MeshPhongMaterial({ color: 0x1e2937 })
+            );
+            craneGroup.add(base);
+            
+            // العمود الرئيسي
+            const pole = new THREE.Mesh(
+                new THREE.BoxGeometry(1.2, 14, 1.2),
+                new THREE.MeshPhongMaterial({ color: 0xc8102e })
+            );
+            pole.position.y = 7.5;
+            craneGroup.add(pole);
+            
+            // الذراع
+            const arm = new THREE.Mesh(
+                new THREE.BoxGeometry(1, 1, 14),
+                new THREE.MeshPhongMaterial({ color: 0x1e2937 })
+            );
+            arm.position.set(0, 13, 0);
+            arm.rotation.z = Math.PI / 6;
+            craneGroup.add(arm);
+            
+            // كابل
+            const cable = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.15, 0.15, 8, 32),
+                new THREE.MeshPhongMaterial({ color: 0x64748b })
+            );
+            cable.position.set(0, 9, 6);
+            cable.rotation.z = Math.PI / 2;
+            craneGroup.add(cable);
+            
+            scene.add(craneGroup);
+            
+            // حلقة التحريك
+            function animate() {
+                requestAnimationFrame(animate);
+                craneGroup.rotation.y += 0.005;
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            // Responsive
+            window.addEventListener('resize', () => {
+                camera.aspect = canvas.clientWidth / canvas.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            });
+        }
+
+        // Modal Functions لكل تخصص (صفحة منفصلة داخل Modal)
+        function showSpecialtyModal(id) {
+            const modal = document.getElementById('specialtyModal');
+            const content = document.getElementById('modalContent');
+            
+            let html = '';
+            
+            if (id === 1) {
+                html = `
+                    <div class="flex justify-between items-start mb-8">
+                        <h2 class="text-5xl font-bold">الروافع والرافعات الشوكية</h2>
+                        <button onclick="hideModal()" class="text-4xl text-gray-400 hover:text-gray-900">×</button>
+                    </div>
+                    <div class="prose prose-lg max-w-none text-gray-700">
+                        <p>صيانة شاملة وإصلاح لجميع أنواع الروافع والرافعات الشوكية باستخدام أحدث أجهزة الفحص الحاسوبي.</p>
+                        <ul class="list-disc list-inside mt-6 space-y-4 text-xl">
+                            <li>تشخيص الأعطال الإلكترونية</li>
+                            <li>إصلاح الهيدروليك والكهرباء</li>
+                            <li>برمجة أنظمة السلامة</li>
+                            <li>صيانة وقائية دورية</li>
+                        </ul>
+                        <div class="mt-12 bg-slate-100 rounded-3xl p-8 text-center text-2xl font-semibold text-[#c8102e]">
+                            خبرة م/ معتز علي الرئيسية في هذا التخصص
+                        </div>
+                    </div>`;
+            } else if (id === 2) {
+                html = `
+                    <div class="flex justify-between items-start mb-8">
+                        <h2 class="text-5xl font-bold">مولدات الديزل</h2>
+                        <button onclick="hideModal()" class="text-4xl text-gray-400 hover:text-gray-900">×</button>
+                    </div>
+                    <div class="prose prose-lg max-w-none text-gray-700">
+                        <p>صيانة وإصلاح مولدات الديزل الصناعية مع ضمان أعلى كفاءة وتقليل وقت التوقف.</p>
+                        <ul class="list-disc list-inside mt-6 space-y-4 text-xl">
+                            <li>فحص شامل للمحرك والكهرباء</li>
+                            <li>تغيير قطع الغيار الأصلية</li>
+                            <li>تركيب وتشغيل مولدات جديدة</li>
+                            <li>حلول الطوارئ 24 ساعة</li>
+                        </ul>
+                        <div class="mt-12 bg-slate-100 rounded-3xl p-8 text-center text-2xl font-semibold text-[#c8102e]">
+                            تخصص م/ معتز علي الرئيسي
+                        </div>
+                    </div>`;
+            } else if (id === 3) {
+                html = `
+                    <div class="flex justify-between items-start mb-8">
+                        <h2 class="text-5xl font-bold">المنظومات الهيدروليكية الكهربائية</h2>
+                        <button onclick="hideModal()" class="text-4xl text-gray-400 hover:text-gray-900">×</button>
+                    </div>
+                    <div class="prose prose-lg max-w-none text-gray-700">
+                        <p>تصميم، تصنيع وبرمجة منظومات هيدروليكية كهربائية مخصصة حسب احتياجات مشروعك.</p>
+                        <ul class="list-disc list-inside mt-6 space-y-4 text-xl">
+                            <li>سكي وبرمجة التحكم الإلكتروني</li>
+                            <li>تصنيع لوحات كهربائية</li>
+                            <li>دمج أنظمة PLC</li>
+                            <li>اختبار الضغط والأداء</li>
+                        </ul>
+                        <div class="mt-12 bg-slate-100 rounded-3xl p-8 text-center text-2xl font-semibold text-[#c8102e]">
+                            تخصص م/ مصعب نور الدين الرئيسي
+                        </div>
+                    </div>`;
+            }
+            
+            content.innerHTML = html;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function hideModal() {
+            const modal = document.getElementById('specialtyModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // التنقل داخل الصفحة
+        function navigateToSection(section) {
+            document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // تشغيل كل شيء عند تحميل الصفحة
+        window.onload = function() {
+            initializeTailwind();
+            initThreeJS();
+            
+            console.log('%c✅ تم تطوير موقع PLANCO بالكامل بـ Tailwind + Three.js + تصميم أبيض + قائمة جانبية + شعار مربع + صفحات تخصص منفصلة', 'color:#c8102e; font-size:16px; font-weight:bold');
+        };
+    </script>
+</body>
+</html>
