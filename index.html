@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLANCO | صيانة الآليات الثقيلة في مصر</title>
+    <meta name="description" content="فريق سوداني متخصص في صيانة الآليات الثقيلة في مصر - م/ معتز علي و م/ مصعب نور الدين">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #c8102e;
+            --dark: #111827;
+            --gray: #1f2937;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            line-height: 1.7;
+            color: #e5e7eb;
+            background: #0a0a0a;
+            direction: rtl;
+        }
+        header {
+            background: rgba(17, 24, 39, 0.97);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--primary);
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        .logo span { color: var(--primary); }
+        nav a {
+            color: #e5e7eb;
+            text-decoration: none;
+            margin-left: 2.2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--primary); }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.85)), url('https://source.unsplash.com/random/1920x1080/?heavy-machinery,crane') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+        .hero-content h1 {
+            font-size: 3.6rem;
+            margin-bottom: 1.2rem;
+            color: white;
+        }
+        .hero-content p {
+            font-size: 1.45rem;
+            max-width: 850px;
+            margin: 0 auto 2.5rem;
+        }
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .btn:hover {
+            background: #a00c24;
+            transform: translateY(-4px);
+        }
+
+        section { padding: 110px 5%; }
+        h2 {
+            font-size: 2.9rem;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: white;
+        }
+
+        .about, .features { background: var(--gray); }
+        .services, .team { background: #111827; }
+        .contact { background: var(--dark); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        .card {
+            background: #1f2937;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 30px rgba(200, 16, 46, 0.2);
+        }
+        .card i {
+            font-size: 3.2rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+        }
+
+        .team .card {
+            padding: 2rem;
+        }
+        .engineer-name {
+            font-size: 1.6rem;
+            color: white;
+            margin: 1rem 0 0.5rem;
+        }
+        .engineer-title {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #0a0a0a;
+            padding: 3.5rem 5%;
+            text-align: center;
+            border-top: 3px solid var(--primary);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.6rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">PLAN<span>CO</span></div>
+        <nav>
+            <a href="#about">عن بلانكو</a>
+            <a href="#services">خدماتنا</a>
+            <a href="#features">مميزاتنا</a>
+            <a href="#team">فريقنا</a>
+            <a href="#contact">تواصل معنا</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>صيانة احترافية للآليات الثقيلة</h1>
+            <p>فريق سوداني متخصص في مصر<br>
+            <strong>م/ معتز علي</strong> و <strong>م/ مصعب نور الدين</strong><br>
+            خبرة تزيد عن 15 عاماً • تقنية متقدمة • حلول موثوقة</p>
+            <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                تواصل مع المهندسين الآن عبر واتساب
+            </button>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <h2>عن PLANCO</h2>
+        <div style="max-width:920px; margin:0 auto; text-align:center; font-size:1.22rem;">
+            <p>
+                <strong>PLANCO</strong> شركة متخصصة في صيانة وإصلاح الآليات الثقيلة في مصر، 
+                تأسست على يد فريق سوداني محترف يجمع بين الخبرة العملية العميقة والتقنيات الحديثة.
+            </p>
+            <p style="margin-top:1.8rem;">
+                نحن <strong>المهندس معتز علي</strong> و<strong>المهندس مصعب نور الدين</strong>، 
+                نملك خبرة مشتركة تتجاوز 15 عاماً في صيانة الروافع، الرافعات الشوكية، مولدات الديزل، 
+                وتصنيع وبرمجة المنظومات الهيدروليكية الكهربائية.
+            </p>
+            <p style="margin-top:1.8rem; color:#fbbf24; font-weight:600; font-size:1.3rem;">
+                صيانة احترافية • تقنية متقدمة • فخر سوداني في مصر
+            </p>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services">
+        <h2>خدماتنا الرئيسية</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-truck-crane"></i>
+                <h3>صيانة الروافع والرافعات الشوكية</h3>
+                <p>صيانة شاملة، إصلاح، وتشخيص دقيق لجميع أنواع الروافع والرافعات الشوكية.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-bolt"></i>
+                <h3>صيانة وإصلاح مولدات الديزل</h3>
+                <p>صيانة دورية، إصلاح الأعطال، وتركيب مولدات الديزل الصناعية.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-hydraulic"></i>
+                <h3>تصنيع منظومات هيدروليكية كهربائية</h3>
+                <p>تصميم وتصنيع حلول هيدروليكية وكهربائية مخصصة حسب احتياج العميل.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <h2>لماذا تختار PLANCO؟</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>فحص حاسوبي متطور</h3>
+                <p>أحدث أجهزة التشخيص الإلكتروني لتحديد الأعطال بدقة عالية.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-cogs"></i>
+                <h3>برمجة و سكي التحكم</h3>
+                <p>برمجة أنظمة التحكم الإلكترونية وإعادة تهيئتها.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-tools"></i>
+                <h3>تصنيع حسب الطلب</h3>
+                <p>حلول هندسية مخصصة تناسب مشاريعكم بدقة.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-headset"></i>
+                <h3>استجابة سريعة ومباشرة</h3>
+                <p>تواصل مباشر مع المهندسين + دعم فني سريع في موقع العمل.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="team">
+        <h2>فريقنا الهندسي</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-user-tie" style="font-size:4rem; margin-bottom:1.5rem;"></i>
+                <div class="engineer-name">م/ معتز علي</div>
+                <div class="engineer-title">مهندس رئيسي - روافع ورافعات شوكية ومولدات ديزل</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-user-tie" style="font-size:4rem; margin-bottom:1.5rem;"></i>
+                <div class="engineer-name">م/ مصعب نور الدين</div>
+                <div class="engineer-title">مهندس رئيسي - منظومات هيدروليكية كهربائية وبرمجة التحكم</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <h2>تواصل مع المهندسين مباشرة</h2>
+        <p style="font-size:1.35rem; margin:2.5rem 0 2rem;">
+            نحن جاهزون لخدمتكم في أي وقت
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; margin:2rem 0;">
+            <a href="https://wa.me/201xxxxxxxxx" target="_blank" class="btn" style="background:#25D366; display:flex; align-items:center; gap:10px;">
+                <i class="fab fa-whatsapp"></i> واتساب - م/ معتز علي
+            </a>
+            <a href="https://wa.me/201xxxxxxxxx" target="_blank" class="btn" style="background:#25D366; display:flex; align-items:center; gap:10px;">
+                <i class="fab fa-whatsapp"></i> واتساب - م/ مصعب نور الدين
+            </a>
+        </div>
+        <p style="margin-top:2rem;">أو راسلنا على: <strong>info@planco-eg.com</strong></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 PLANCO - صيانة الآليات الثقيلة | فريق سوداني متخصص في مصر</p>
+        <p style="margin-top:0.8rem;">م/ معتز علي  •  م/ مصعب نور الدين</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
